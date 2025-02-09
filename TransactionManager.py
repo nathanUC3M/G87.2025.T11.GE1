@@ -1,15 +1,35 @@
 import json
 from .TransactionManagementException import TransactionManagementException
 from .TransactionRequest import TransactionRequest
+import re
 
 class TransactionManager:
     def __init__(self):
         pass
 
+
     def ValidateIBAN( self, IbAn ):
         # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
         # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
-        return True
+        IBAN_FORMAT = re.compile(r"^[A-Z]{2}\d{2}[A-Z0-9]+$")
+
+        if not IBAN_FORMAT.match(IbAn):
+            return False
+
+        country_abrv = IbAn[:2]
+        if country_abrv != "ES" or country_abrv.isNumeric():
+            return False
+
+        mixed_iban = IbAn[4:] + IbAn[:4]
+        numeric_iban = "".join(str(ord(char) - 55) if char.isalpha() else char for char in mixed_iban)
+
+        iban_int = int(numeric_iban)
+        return iban_int % 97 == 1
+
+    #print(validate_iban("GB82WEST12345698765432")) true
+    #print(validate_iban("FR7630006000011234567890189")) false
+
+
 
     def ReadproductcodefromJSON( self, fi ):
 
