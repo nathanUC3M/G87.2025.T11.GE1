@@ -1,3 +1,9 @@
+"""
+Transaction Manager
+
+This module defines the Transaction Manager class. This class provides methods
+to validate IBANs and process transaction requests from JSON files.
+"""
 import json
 from UC3MMoney1.TransactionManagementException import TransactionManagementException
 from TransactionRequest import TransactionRequest
@@ -5,35 +11,54 @@ import re
 
 
 class TransactionManager:
+    """
+    A class to manage transaction requests from JSON files.
+
+    Methods: validate_iban(self, iban): Validates the IBAN number based on
+    format and digit checking
+    readproductcodefrom_json(fi): Reads transaction details from a JSON file
+    and validates IBANS
+    """
     def __init__(self):
+        """ Initializes the Transaction Manager class."""
         pass
 
 
-    def ValidateIBAN( self, IbAn ):
-        # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
-        # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
-        IBAN_FORMAT = re.compile(r"^[A-Z]{2}\d{2}[A-Z0-9]+$")
+    def validate_iban(self, iban):
+        """
+        Validates the IBAN, checks if the IBAN has the correct format and
+        passes MOD-97 validation
 
-        if not IBAN_FORMAT.match(IbAn):
+        :param iban (str): The IBAN number to be validated
+        :return: bool: True if the IBAN has the correct format and is valid, else false
+        """
+        iban_format = re.compile(r"^ES\d{2}[A-Z0-9]+$")
+
+        #Below makes sure parameter matches the IBAN format
+        if not iban_format.match(iban):
             return False
-
-        country_abrv = IbAn[:2]
-        if country_abrv != "ES" or country_abrv.isNumeric():
-            return False
-
-        mixed_iban = IbAn[4:] + IbAn[:4]
+        #Moves the values at the indexes 0-3 to the back of the IBAN
+        mixed_iban = iban[4:] + iban[:4]
+        #Iterates over the IBAN changing the letters to their numeric counterpart
+        #according to the ASCII relation
         numeric_iban = "".join(str(ord(char) - 55) if char.isalpha() else char for char in mixed_iban)
 
+        #Converts the IBAN to an integer and performs the MOD 97 on it
         iban_int = int(numeric_iban)
         return iban_int % 97 == 1
 
-
-
-    def ReadproductcodefromJSON( self, fi ):
+    def readproductcodefrom_json(self, fi):
+        """
+        Reads transaction details from a JSON file
+        :param fi: (str) The path to the file to be read
+        :return: TransactionRequest: An object containing the transaction details
+        if the file is valid
+        :raises: TransactionManagementException: If the file is not valid or not found
+        """
 
         try:
             with open(fi) as f:
-                DATA = json.load(f)
+                data = json.load(f)
         except FileNotFoundError as e:
             raise TransactionManagementException("Wrong file or file path") from e
         except json.JSONDecodeError as e:
@@ -41,15 +66,15 @@ class TransactionManager:
 
 
         try:
-            T_FROM = DATA["from"]
-            T_TO = DATA["to"]
-            TO_NAME = DATA["receptor_name"]
-            req = TransactionRequest(T_FROM, T_TO,TO_NAME)
+            t_from = data["from"]
+            t_to = data["to"]
+            to_name = data["receptor_name"]
+            req = TransactionRequest(t_from, t_to,to_name)
         except KeyError as e:
             raise TransactionManagementException("JSON Decode Error - Invalid JSON Key") from e
-        if not self.ValidateIBAN(T_FROM) :
+        if not self.validate_iban(t_from) :
             raise TransactionManagementException("Invalid FROM IBAN")
         else:
-            if not self.ValidateIBAN(T_TO):
+            if not self.validate_iban(t_to):
                 raise TransactionManagementException("Invalid TO IBAN")
         return req
