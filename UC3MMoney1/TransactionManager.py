@@ -1,7 +1,8 @@
 import json
-from .TransactionManagementException import TransactionManagementException
-from .TransactionRequest import TransactionRequest
+from UC3MMoney1.TransactionManagementException import TransactionManagementException
+from TransactionRequest import TransactionRequest
 import re
+
 
 class TransactionManager:
     def __init__(self):
@@ -25,9 +26,6 @@ class TransactionManager:
 
         iban_int = int(numeric_iban)
         return iban_int % 97 == 1
-
-    #print(validate_iban("GB82WEST12345698765432")) true
-    #print(validate_iban("FR7630006000011234567890189")) false
 
 
 
