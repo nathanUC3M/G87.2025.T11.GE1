@@ -5,7 +5,7 @@ This module defines the Transaction Manager class. This class provides methods
 to validate IBANs and process transaction requests from JSON files.
 """
 import json
-from UC3MMoney1.TransactionManagementException import TransactionManagementException
+from UC3MMoney.TransactionManagementException import TransactionManagementException
 from TransactionRequest import TransactionRequest
 import re
 
@@ -16,7 +16,7 @@ class TransactionManager:
 
     Methods: validate_iban(self, iban): Validates the IBAN number based on
     format and digit checking
-    readproductcodefrom_json(fi): Reads transaction details from a JSON file
+    read_product_code_from_json(fi): Reads transaction details from a JSON file
     and validates IBANS
     """
     def __init__(self):
@@ -47,7 +47,8 @@ class TransactionManager:
         iban_int = int(numeric_iban)
         return iban_int % 97 == 1
 
-    def readproductcodefrom_json(self, fi):
+
+    def read_product_code_from_json(self, fi):
         """
         Reads transaction details from a JSON file
         :param fi: (str) The path to the file to be read
