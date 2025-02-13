@@ -55,7 +55,7 @@ def main():
 
     mng = TransactionManager()
     res = mng.read_product_code_from_json("test.json")
-    str_res = res.__str__()
+    str_res = str(res)
     print(str_res)
     validate_iban = mng.validate_iban(str_res)
     print(validate_iban)

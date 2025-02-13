@@ -57,7 +57,7 @@ class TransactionManager:
         """
 
         try:
-            with open(fi) as f:
+            with open(fi, encoding='utf-8') as f:
                 data = json.load(f)
         except FileNotFoundError as e:
             raise TransactionManagementException("Wrong file or file path") from e
