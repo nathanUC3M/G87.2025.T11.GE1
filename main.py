@@ -55,22 +55,19 @@ def main():
 
     mng = TransactionManager()
     res = mng.read_product_code_from_json("test.json")
-    if mng.validate_iban(res.iban_to) and mng.validate_iban(res.iban_from):
-        str_res = res.__str__()
-        encode_res = encode(str_res)
-        print("Encoded Res " + encode_res)
-        decode_res = decode(encode_res)
-        print("Decoded Res: " + decode_res)
-        print("IBAN_FROM: " + res.iban_from)
-        print("IBAN_TO: " + res.iban_to)
-    else:
-        print("IBAN VALIDATION FAILED")
+    for res in res:
+
+        if mng.validate_iban(res.iban_to) and mng.validate_iban(res.iban_from):
+            str_res = res.__str__()
+            encode_res = encode(str_res)
+            print("Encoded Res " + encode_res)
+            decode_res = decode(encode_res)
+            print("Decoded Res: " + decode_res)
+            print("IBAN_FROM: " + res.iban_from)
+            print("IBAN_TO: " + res.iban_to)
+        else:
+            print("IBAN VALIDATION FAILED")
 
 if __name__ == "__main__":
     main()
-    #"from": "ES9121000418450200051332",
-    #"to": "ES2400491500162128195151",
-    #"receptor_name": "Greta Leege"
 
-#"ES10000010012345678900"
-#"ES2400491500162128195151",

@@ -21,6 +21,7 @@ class TransactionManager:
     """
     def __init__(self):
         """ Initializes the Transaction Manager class."""
+        pass
 
 
     def validate_iban(self, iban):
@@ -58,13 +59,12 @@ class TransactionManager:
         """
 
         try:
-            with open(fi, encoding='utf-8') as f:
+            with open(fi) as f:
                 data = json.load(f)
         except FileNotFoundError as e:
             raise TransactionManagementException("Wrong file or file path") from e
         except json.JSONDecodeError as e:
             raise TransactionManagementException("JSON decode Error - Wrong JSON Format") from e
-
 
         try:
             t_from = data["from"]
@@ -75,6 +75,7 @@ class TransactionManager:
             raise TransactionManagementException("JSON decode Error - Invalid JSON Key") from e
         if not self.validate_iban(t_from) :
             raise TransactionManagementException("Invalid FROM IBAN")
-        if not self.validate_iban(t_to):
-            raise TransactionManagementException("Invalid TO IBAN")
+        else:
+            if not self.validate_iban(t_to):
+                raise TransactionManagementException("Invalid TO IBAN")
         return req

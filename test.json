@@ -1,8 +1,15 @@
-{
-  "from": "ES9121000418450200051332",
-  "to":  "ES7921000813610123456789",
-  "receptor_name": "Jose Lopez"
-}
+[
+  {
+    "from": "ES9121000418450200051332",
+    "to":  "ES7921000813610123456789",
+    "receptor_name": "Jose Lopez"
+  },
+  {
+    "from": "ES1234567890123456",
+    "to": "ES91@1000418450200051332",
+    "receptor_name": "Nadha Skolar"
+  }
+]
 
 
 
