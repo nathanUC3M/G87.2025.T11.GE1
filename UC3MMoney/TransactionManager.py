@@ -4,10 +4,10 @@ Transaction Manager
 This module defines the Transaction Manager class. This class provides methods
 to validate IBANs and process transaction requests from JSON files.
 """
+import re
 import json
 from UC3MMoney.TransactionManagementException import TransactionManagementException
 from UC3MMoney.TransactionRequest import TransactionRequest
-import re
 
 
 class TransactionManager:
@@ -39,7 +39,7 @@ class TransactionManager:
             return False
         #Moves the values at the indexes 0-3 to the back of the IBAN
         mixed_iban = iban[4:] + iban[:4]
-        #Iterates over the IBAN changing the letters to their numeric counterpart
+        #Iterates over the IBAN changing the LETTERS to their numeric counterpart
         #according to the ASCII relation
         numeric_iban = "".join(str(ord(char) - 55) if char.isalpha() else char for char in mixed_iban)
 
