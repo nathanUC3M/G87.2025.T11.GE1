@@ -4,10 +4,11 @@ Transaction Manager
 This module defines the Transaction Manager class. This class provides methods
 to validate IBANs and process transaction requests from JSON files.
 """
+import re
 import json
 from UC3MMoney.TransactionManagementException import TransactionManagementException
 from UC3MMoney.TransactionRequest import TransactionRequest
-import re
+
 
 
 class TransactionManager:
@@ -21,7 +22,6 @@ class TransactionManager:
     """
     def __init__(self):
         """ Initializes the Transaction Manager class."""
-        pass
 
 
     def validate_iban(self, iban):
@@ -75,7 +75,6 @@ class TransactionManager:
             raise TransactionManagementException("JSON decode Error - Invalid JSON Key") from e
         if not self.validate_iban(t_from) :
             raise TransactionManagementException("Invalid FROM IBAN")
-        else:
-            if not self.validate_iban(t_to):
-                raise TransactionManagementException("Invalid TO IBAN")
+        if not self.validate_iban(t_to):
+            raise TransactionManagementException("Invalid TO IBAN")
         return req

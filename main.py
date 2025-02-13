@@ -1,3 +1,6 @@
+"""
+
+"""
 from UC3MMoney.TransactionManager import TransactionManager
 import string
 
