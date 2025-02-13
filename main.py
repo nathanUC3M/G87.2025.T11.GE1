@@ -44,41 +44,23 @@ def decode(word):
             encoded = encoded + LETTERS[x]
     return encoded
 
-def run_test_cases(test_case):
+def main():
     """
     Function that reads IBAN from JSON file using
     a TransactionManager, validates the IBAN, encodes and
     decodes the IBAN, and prints the original, encoded, and
     decoded strings.
     """
-
     mng = TransactionManager()
-    res = mng.read_product_code_from_json(test_case)
+    res = mng.read_product_code_from_json("test.json")
 
-    if mng.validate_iban(res.iban_to) and mng.validate_iban(res.iban_from):
-        str_res = res.__str__()
-        encode_res = encode(str_res)
-        print("Encoded Res " + encode_res)
-        decode_res = decode(encode_res)
-        print("Decoded Res: " + decode_res)
-        print("IBAN_FROM: " + res.iban_from)
-        print("IBAN_TO: " + res.iban_to)
-    else:
-        print("IBAN VALIDATION FAILED")
-
-def main():
-    """
-    Main function that reads the test files
-    """
-
-    print("Valid Iban Test Case: ")
-    run_test_cases("CorrectTest.json")
-
-    print("Invalid IBAN Test Case: ")
-    run_test_cases("IncorrectTest.json")
+    str_res = str(res)
+    encode_res = encode(str_res)
+    print("Encoded Res " + encode_res)
+    decode_res = decode(encode_res)
+    print("Decoded Res: " + decode_res)
+    print("IBAN_FROM: " + res.iban_from)
+    print("IBAN_TO: " + res.iban_to)
 
 if __name__ == "__main__":
     main()
-
-
-
