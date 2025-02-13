@@ -40,6 +40,9 @@ fail-on=
 
 #MODIFIED RULE: Decreased the threshold to allow for more relaxed style standards
 # Specify a score threshold under which the program will exit with error.
+#<ORIGINAL RULE>
+#fail-under=10.0
+#<MODIFIED RULE>
 fail-under=9
 
 # Interpret the stdin as a python script, whose filename needs to be passed as
@@ -54,6 +57,9 @@ ignore=CVS
 # ignore-list. The regex matches against paths and can be in Posix or Windows
 # format. Because '\\' represents the directory delimiter on Windows systems,
 # it can't be used as an escape character.
+#<ORIGINAL RULE>
+#ignore-paths=
+#<MODIFIED RULE>
 ignore-paths=.*/autogen/.*
 
 # Files or directories matching the regular expression patterns are skipped.
@@ -166,6 +172,10 @@ class-const-naming-style=UPPER_CASE
 
 # MODIFIED RULE: changed style name
 # Naming style matching correct class names.
+#<ORIGINAL RULE>
+#class-naming-style=CamelCase
+
+#<MODIFIED RULE>
 class-naming-style=PascalCase
 
 # Regular expression matching correct class names. Overrides class-naming-
@@ -183,6 +193,10 @@ const-naming-style=UPPER_CASE
 # MODIFIED RULE: Enforce docstrings for all public interfaces to improve documentation
 # Minimum line length for functions/classes that require docstrings, shorter
 # ones are exempt.
+#<ORIGINAL RULE>
+#docstring-min-length=0
+
+#<MODIFIED RULE>
 docstring-min-length=1
 
 # Naming style matching correct function names.
@@ -225,6 +239,10 @@ method-naming-style=snake_case
 
 # MODIFIED RULE: Allow freedom for naming conventions
 # Naming style matching correct module names.
+#<ORIGINAL RULE>
+#module-naming-style=snake_case
+
+<MODIFIED RULE>
 module-naming-style=any
 
 # Regular expression matching correct module names. Overrides module-naming-
@@ -296,6 +314,10 @@ ignored-parents=
 
 # MODIFIED RULE: Increased maximum number of arguments to allow for more method freedom
 # Maximum number of arguments for function / method.
+#<ORIGINAL RULE>
+#max-args=5
+
+#<MODIFIED RULE>
 max-args=7
 
 # Maximum number of attributes for a class (see R0902).
@@ -309,10 +331,18 @@ max-branches=12
 
 # MODIFIED RULE: Decreased maximum number of locals to encourage more concise functions
 # Maximum number of locals for function / method body.
+#<ORIGINAL RULE>
+#max-locals=15
+#<MODIFIED RULE>
 max-locals=13
 
+# MODIFIED RULE: Increased maximum number of parents to allow for more interaction between classes
 # Maximum number of parents for a class (see R0901).
-max-parents=7
+#<ORIGINAL RULE>
+#max-parents=7
+
+#<MODIFIED RULE>
+max-parents= 9
 
 # Maximum number of positional arguments for function / method.
 max-positional-arguments=5
@@ -325,10 +355,16 @@ max-returns=6
 
 # MODIFIED RULE: Decreased maximum number if statements in a function to encourage conciseness
 # Maximum number of statements in function / method body.
+#<ORIGINAL RULE>
+#max-statements=50
+#<MODIFIED RULE>
 max-statements=45
 
 #MODIFIED RULE: Decreased number of public methods
 # Minimum number of public methods for a class (see R0903).
+#<ORIGINAL RULE>
+#min-public-methods=2
+#<MODIFIED RULE>
 min-public-methods=1
 
 
@@ -355,10 +391,19 @@ indent-string='    '
 
 # MODIFIED RULE: Increased maximum line length for better readability
 # Maximum number of characters on a single line.
+#<ORIGINAL RULE>
+#max-line-length=100
+
+#<MODIFIED RULE>
 max-line-length=130
 
+#MODIFIED RULE: Increased maximum number of lines for more flexibility
 # Maximum number of lines in a module.
-max-module-lines=1000
+#<ORIGINAL RULE>
+#max-module-lines=1000
+
+#<MODIFIED RULE>
+max-module-lines=1100
 
 # Allow the body of a class to be on the same line as the declaration if body
 # contains single statement.
@@ -633,6 +678,9 @@ additional-builtins=
 
 # MODIFIED RULE: Disallowed global unused variables to promote cleaner code
 # Tells whether unused global variables should be treated as a violation.
+#<ORIGINAL RULE>
+#allow-global-unused-variables=yes
+#<MODIFIED RULE>
 allow-global-unused-variables=no
 
 # List of names allowed to shadow builtins
