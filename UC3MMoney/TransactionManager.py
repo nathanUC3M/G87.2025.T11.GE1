@@ -32,6 +32,7 @@ class TransactionManager:
         :param iban (str): The IBAN number to be validated
         :return: bool: True if the IBAN has the correct format and is valid, else false
         """
+        iban = iban.replace(" ", "").upper()
         iban_format = re.compile(r"^ES\d{2}[A-Z0-9]+$")
 
         #Below makes sure parameter matches the IBAN format
