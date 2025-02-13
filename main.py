@@ -5,6 +5,7 @@ with a TransactionManager.
 """
 import string
 from UC3MMoney.transaction_manager import TransactionManager
+from UC3MMoney.transaction_request import TransactionRequest
 
 
 #GLOBAL VARIABLES
@@ -53,7 +54,7 @@ def main():
     """
     mng = TransactionManager()
     res = mng.read_product_code_from_json("test.json")
-
+    obj = TransactionRequest()
     str_res = str(res)
     encode_res = encode(str_res)
     print("Encoded Res " + encode_res)
