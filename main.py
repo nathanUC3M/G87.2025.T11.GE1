@@ -1,36 +1,57 @@
 """
-
+Module for encoding and decoding strings,
+reading IBANS from JSON, and validating them
+with a TransactionManager.
 """
-from UC3MMoney.TransactionManager import TransactionManager
 import string
+from UC3MMoney.TransactionManager import TransactionManager
+
 
 #GLOBAL VARIABLES
-letters = string.ascii_letters + string.punctuation + string.digits
-shift = 3
+LETTERS = string.ascii_letters + string.punctuation + string.digits
+SHIFT = 3
 
 
 def encode(word):
+    """
+    Encodes a string using a shift cipher.
+
+    :param word: the string to encode
+    :return: the encoded string
+    """
     encoded = ""
     for letter in word:
         if letter == ' ':
             encoded = encoded + ' '
         else:
-            x = (letters.index(letter) + shift) % len(letters)
-            encoded = encoded + letters[x]
+            x = (LETTERS.index(letter) + SHIFT) % len(LETTERS)
+            encoded = encoded + LETTERS[x]
     return encoded
 
 def decode(word):
+    """
+    Decodes a string that was encoded
+
+    :param word: The encoded string to decode
+    :return: the decoded string
+    """
     encoded = ""
     for letter in word:
         if letter == ' ':
             encoded = encoded + ' '
         else:
-            x = (letters.index(letter) - shift) % len(letters)
-            encoded = encoded + letters[x]
+            x = (LETTERS.index(letter) - SHIFT) % len(LETTERS)
+            encoded = encoded + LETTERS[x]
     return encoded
 
 
 def main():
+    """
+    Main function that reads IBAN from JSON file using
+    a TransactionManager, validates the IBAN, encodes and
+    decodes the IBAN, and prints the original, encoded, and
+    decoded strings.
+    """
 
     mng = TransactionManager()
     res = mng.read_product_code_from_json("test.json")
@@ -47,3 +68,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+    #"from": "ES9121000418450200051332",
+    #"to": "ES2400491500162128195151",
+    #"receptor_name": "Greta Leege"
+
+#"ES10000010012345678900"
+#"ES2400491500162128195151",

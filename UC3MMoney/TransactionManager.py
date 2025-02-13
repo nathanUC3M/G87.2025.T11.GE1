@@ -10,7 +10,6 @@ from UC3MMoney.TransactionManagementException import TransactionManagementExcept
 from UC3MMoney.TransactionRequest import TransactionRequest
 
 
-
 class TransactionManager:
     """
     A class to manage transaction requests from JSON files.
@@ -22,6 +21,7 @@ class TransactionManager:
     """
     def __init__(self):
         """ Initializes the Transaction Manager class."""
+        pass
 
 
     def validate_iban(self, iban):
@@ -39,7 +39,7 @@ class TransactionManager:
             return False
         #Moves the values at the indexes 0-3 to the back of the IBAN
         mixed_iban = iban[4:] + iban[:4]
-        #Iterates over the IBAN changing the letters to their numeric counterpart
+        #Iterates over the IBAN changing the LETTERS to their numeric counterpart
         #according to the ASCII relation
         numeric_iban = "".join(str(ord(char) - 55) if char.isalpha() else char for char in mixed_iban)
 
@@ -75,6 +75,7 @@ class TransactionManager:
             raise TransactionManagementException("JSON decode Error - Invalid JSON Key") from e
         if not self.validate_iban(t_from) :
             raise TransactionManagementException("Invalid FROM IBAN")
-        if not self.validate_iban(t_to):
-            raise TransactionManagementException("Invalid TO IBAN")
+        else:
+            if not self.validate_iban(t_to):
+                raise TransactionManagementException("Invalid TO IBAN")
         return req
