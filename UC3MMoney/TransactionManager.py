@@ -19,8 +19,6 @@ class TransactionManager:
     read_product_code_from_json(fi): Reads transaction details from a JSON file
     and validates IBANS
     """
-    def __init__(self):
-        """ Initializes the Transaction Manager class."""
 
 
     def validate_iban(self, iban):
@@ -31,6 +29,9 @@ class TransactionManager:
         :param iban (str): The IBAN number to be validated
         :return: bool: True if the IBAN has the correct format and is valid, else false
         """
+        # Valid IBAN: ES9121000418450200051332
+        # Invalid IBAN: "ES91@1000418450200051332
+        iban = iban.replace(" ", "").upper()
         iban_format = re.compile(r"^ES\d{2}[A-Z0-9]+$")
 
         #Below makes sure parameter matches the IBAN format
@@ -45,6 +46,8 @@ class TransactionManager:
         #Converts the IBAN to an integer and performs the MOD 97 on it
         iban_int = int(numeric_iban)
         return iban_int % 97 == 1
+
+
 
 
     def read_product_code_from_json(self, fi):
@@ -63,7 +66,6 @@ class TransactionManager:
             raise TransactionManagementException("Wrong file or file path") from e
         except json.JSONDecodeError as e:
             raise TransactionManagementException("JSON decode Error - Wrong JSON Format") from e
-
 
         try:
             t_from = data["from"]
