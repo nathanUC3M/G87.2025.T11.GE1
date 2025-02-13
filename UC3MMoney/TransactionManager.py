@@ -6,7 +6,7 @@ to validate IBANs and process transaction requests from JSON files.
 """
 import json
 from UC3MMoney.TransactionManagementException import TransactionManagementException
-from TransactionRequest import TransactionRequest
+from UC3MMoney.TransactionRequest import TransactionRequest
 import re
 
 
@@ -63,7 +63,7 @@ class TransactionManager:
         except FileNotFoundError as e:
             raise TransactionManagementException("Wrong file or file path") from e
         except json.JSONDecodeError as e:
-            raise TransactionManagementException("JSON Decode Error - Wrong JSON Format") from e
+            raise TransactionManagementException("JSON decode Error - Wrong JSON Format") from e
 
 
         try:
@@ -72,7 +72,7 @@ class TransactionManager:
             to_name = data["receptor_name"]
             req = TransactionRequest(t_from, t_to,to_name)
         except KeyError as e:
-            raise TransactionManagementException("JSON Decode Error - Invalid JSON Key") from e
+            raise TransactionManagementException("JSON decode Error - Invalid JSON Key") from e
         if not self.validate_iban(t_from) :
             raise TransactionManagementException("Invalid FROM IBAN")
         else:
