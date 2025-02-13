@@ -21,7 +21,6 @@ class TransactionManager:
     """
     def __init__(self):
         """ Initializes the Transaction Manager class."""
-        pass
 
 
     def validate_iban(self, iban):
@@ -75,7 +74,6 @@ class TransactionManager:
             raise TransactionManagementException("JSON decode Error - Invalid JSON Key") from e
         if not self.validate_iban(t_from) :
             raise TransactionManagementException("Invalid FROM IBAN")
-        else:
-            if not self.validate_iban(t_to):
-                raise TransactionManagementException("Invalid TO IBAN")
+        if not self.validate_iban(t_to):
+            raise TransactionManagementException("Invalid TO IBAN")
         return req
