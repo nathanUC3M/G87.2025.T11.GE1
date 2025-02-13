@@ -4,7 +4,7 @@ reading IBANS from JSON, and validating them
 with a TransactionManager.
 """
 import string
-from UC3MMoney.TransactionManager import TransactionManager
+from UC3MMoney.transaction_manager import TransactionManager
 
 
 #GLOBAL VARIABLES

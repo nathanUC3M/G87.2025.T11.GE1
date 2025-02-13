@@ -242,8 +242,8 @@ method-naming-style=snake_case
 #<ORIGINAL RULE>
 #module-naming-style=snake_case
 
-<MODIFIED RULE>
-module-naming-style=any
+#<MODIFIED RULE>
+module-naming-style=PascalCase
 
 # Regular expression matching correct module names. Overrides module-naming-
 # style. If left empty, module names will be checked with the set naming style.
@@ -588,7 +588,7 @@ min-similarity-lines=4
 # This was changed because we can make a lot spelling mistakes
 and want to catch more.
 #<ORIGINAL RULE>
-max-spelling-suggestions=4
+#max-spelling-suggestions=4
 #<MODIFIED RULE>
 max-spelling-suggestion=8
 
@@ -612,7 +612,7 @@ spelling-private-dict-file=
 #We changed this so it will alert us when we type an unknown word even if
 added to the dictionary. We want to verify all unknown words
 #<ORIGINAL RULE>
-spelling-store-unknown-words=no
+#spelling-store-unknown-words=no
 #<MODIFIED RULE>
 spelling-store-unknown-words=yes
 
@@ -674,7 +674,7 @@ missing-member-hint=yes
 us, we only want the automated message when we type 2 characters that are
 similar
 #<ORIGINAL RULE>
-missing-member-hint-distance=1
+#missing-member-hint-distance=1
 #<MODIFIED RULE>
 missing-member-hint-distance=2
 

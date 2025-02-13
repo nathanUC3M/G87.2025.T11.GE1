@@ -6,8 +6,8 @@ to validate IBANs and process transaction requests from JSON files.
 """
 import re
 import json
-from UC3MMoney.TransactionManagementException import TransactionManagementException
-from UC3MMoney.TransactionRequest import TransactionRequest
+from UC3MMoney.transaction_management_exception import TransactionManagementException
+from UC3MMoney.transaction_request import TransactionRequest
 
 
 class TransactionManager:
@@ -41,7 +41,8 @@ class TransactionManager:
         mixed_iban = iban[4:] + iban[:4]
         #Iterates over the IBAN changing the LETTERS to their numeric counterpart
         #according to the ASCII relation
-        numeric_iban = "".join(str(ord(char) - 55) if char.isalpha() else char for char in mixed_iban)
+        numeric_iban = "".join(str(ord(char) - 55) if char.isalpha()
+                               else char for char in mixed_iban)
 
         #Converts the IBAN to an integer and performs the MOD 97 on it
         iban_int = int(numeric_iban)
