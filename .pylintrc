@@ -538,8 +538,14 @@ min-similarity-lines=4
 
 [SPELLING]
 
+#MODIFIED RULE
 # Limits count of emitted suggestions for spelling mistakes.
+# This was changed because we can make a lot spelling mistakes
+and want to catch more.
+#<ORIGINAL RULE>
 max-spelling-suggestions=4
+#<MODIFIED RULE>
+max-spelling-suggestion=8
 
 # Spelling dictionary name. No available dictionaries : You need to install
 # both the python package and the system dependency for enchant to work.
@@ -555,9 +561,15 @@ spelling-ignore-words=
 # A path to a file that contains the private dictionary; one word per line.
 spelling-private-dict-file=
 
+#MODIFIED RULE
 # Tells whether to store unknown words to the private dictionary (see the
 # --spelling-private-dict-file option) instead of raising a message.
+#We changed this so it will alert us when we type an unknown word even if
+added to the dictionary. We want to verify all unknown words
+#<ORIGINAL RULE>
 spelling-store-unknown-words=no
+#<MODIFIED RULE>
+spelling-store-unknown-words=yes
 
 
 [STRING]
@@ -610,9 +622,16 @@ ignored-classes=optparse.Values,thread._local,_thread._local,argparse.Namespace
 # of finding the hint is based on edit distance.
 missing-member-hint=yes
 
+#MODIFIED RULE
 # The minimum edit distance a name should have in order to be considered a
 # similar match for a missing member name.
+#We changed this in case we type a letter and it automatically tries to correct
+us, we only want the automated message when we type 2 characters that are
+similar
+#<ORIGINAL RULE>
 missing-member-hint-distance=1
+#<MODIFIED RULE>
+missing-member-hint-distance=2
 
 # The total number of similar names that should be taken in consideration when
 # showing a hint for a missing member.
